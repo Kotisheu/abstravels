@@ -3,10 +3,13 @@ package utils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
- 
+import java.util.Map;
+
 import beans.Product;
 import beans.UserAccount;
  
@@ -135,6 +138,37 @@ public class DBUtils {
         pstm.setString(1, code);
  
         pstm.executeUpdate();
+    }
+    public static List<String> getTables(Connection conn) throws SQLException {
+        String sql = "show tables";
+ 
+        PreparedStatement pstm = conn.prepareStatement(sql);
+ 
+        ResultSet rs = pstm.executeQuery();
+        List<String> list = new ArrayList<>();
+        while (rs.next()) {
+            list.add(rs.getString(1));
+        }
+        return list;
+    }
+    public static List<Map<String,Object>> getTable(Connection conn, String name) throws SQLException {
+        String sql = "select * from "+name;
+ 
+        PreparedStatement pstm = conn.prepareStatement(sql);
+ 
+        ResultSet rs = pstm.executeQuery();
+        ResultSetMetaData metaData=rs.getMetaData();
+        int colCount= metaData.getColumnCount();
+        List<Map<String,Object>>rows= new ArrayList<>();
+        while (rs.next()) {
+        	Map<String,Object> columns = new LinkedHashMap<String,Object>();
+        	for(int i=1;i<=colCount;i++) {
+        		columns.put(metaData.getColumnLabel(i),rs.getObject(i));
+        	}
+        	rows.add(columns);
+            
+        }
+        return rows;
     }
  
 }
