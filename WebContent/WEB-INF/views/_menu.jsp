@@ -9,10 +9,7 @@
    |
    <a href="${pageContext.request.contextPath}/userInfo">My Account Info</a>
    |
-   <a href="${pageContext.request.contextPath}/login">Login</a>
-   |
-   <a href="${pageContext.request.contextPath}/register">Register</a>
-   |
+ 
    <a href="${pageContext.request.contextPath}/view">View Tables</a>
     
 </div>  
