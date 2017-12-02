@@ -4,6 +4,9 @@ import java.sql.Date;
 
 public class Employee extends Person{
 int SSN;
+boolean isManager;
+Date startDate;
+int hourlyRate;
 public int getSSN() {
 	return SSN;
 }
@@ -28,7 +31,5 @@ public int getHourlyRate() {
 public void setHourlyRate(int hourlyRate) {
 	this.hourlyRate = hourlyRate;
 }
-boolean isManager;
-Date startDate;
-int hourlyRate;
+
 }

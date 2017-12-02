@@ -4,6 +4,12 @@ import java.sql.Date;
 
 public class Customer extends Person{
 	int accountNo;
+	int ccNo;
+	String email;
+	Date creationDate;
+	int rating;
+	int phoneNum;
+	
 	public int getAccountNo() {
 		return accountNo;
 	}
@@ -40,9 +46,5 @@ public class Customer extends Person{
 	public void setPhoneNum(int phoneNum) {
 		this.phoneNum = phoneNum;
 	}
-	int ccNo;
-	String email;
-	Date creationDate;
-	int rating;
-	int phoneNum;
+	
 }
