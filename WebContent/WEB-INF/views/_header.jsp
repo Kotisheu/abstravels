@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
-<div style="background: #E0E0E0; height: 55px; padding: 5px;">
+<div style="background: #bfd3c1; height: 55px; padding: 4px;">
+
   <div style="float: left">
-     <h1>ABSTravellings</h1>
+     <h1 style="background: ac92a6;color:#ffffff;">ABSTravelling</h1>
   </div>
  
   <div style="float: right; padding: 10px; text-align: right;">
