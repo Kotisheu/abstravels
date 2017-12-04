@@ -66,10 +66,12 @@
 	</table>
 	<br>
 	</div>
+	<div id="multiple"></div>
 	<input type="button" value="Add Another City" onclick="addCity()">
 </div> 
+<br>
 	<input type="submit" value="Search">
-
+<br>
 </form>
 </div>
 <script>
@@ -103,10 +105,11 @@ for(var i = 0; i < radios.length; i++) {
     }
 }
 function addCity(){
-	alert("aaaa");
+	
 	var inside= document.getElementById("inner");
+	var multi= document.getElementById("multiple");
 	var clone = inside.cloneNode(true);
-	inside.appendChild(clone);
+	multiple.appendChild(clone);
 }
 $(function() {
     $('input[name="depart"]').daterangepicker({
