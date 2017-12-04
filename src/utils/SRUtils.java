@@ -15,7 +15,7 @@ public class SRUtils {
 	        String sql = "Select a.Code, a.Name, a.Price from Product a where a.Code=?";
 	 
 	        PreparedStatement pstm = conn.prepareStatement(sql);
-	        pstm.setString(1, code);
+	        //pstm.setString(1, code);
 	        List<Flight> flights = new ArrayList<>();
 	        ResultSet rs = pstm.executeQuery();
 	 

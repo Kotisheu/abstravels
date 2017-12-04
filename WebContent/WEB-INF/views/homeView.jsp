@@ -13,7 +13,7 @@
  
      <jsp:include page="_header.jsp"></jsp:include>
       <center> <jsp:include page="_menu.jsp"></jsp:include>
-
+<div class = "container-fluid">
     <h3 >Welcome to the homepage of ABS Travellings</h3>
    We offer flights at amazing deals! Come and book with us today! <br><br>
    <jsp:include page="searchView.jsp"></jsp:include>   
@@ -39,7 +39,7 @@
                                            .-'    ,-'       ``` `-..
                                             `-..-'                  -
                                             </pre></center>
-                                         
+ </div>                                       
      <jsp:include page="_footer.jsp"></jsp:include>
  
   </body>

@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
  
-<<<<<<< HEAD
+
 import beans.Product;
 import beans.Search;
 import utils.DBUtils;
-=======
+
 import beans.Flight;
 import utils.SRUtils;
->>>>>>> master
+
 import utils.MyUtils;
  
 @WebServlet(urlPatterns = {"/result" })
@@ -74,6 +74,9 @@ public class SearchServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	
+    	String ways =  request.getParameter("ways");
+    	
     	String departLocation = request.getParameter("from");
     	
     	String arrivalLocation = request.getParameter("to");
@@ -81,15 +84,14 @@ public class SearchServlet extends HttpServlet {
     	int numAdults = Integer.valueOf(request.getParameter("adults"));
     	int numChild = Integer.valueOf(request.getParameter("child"));
     	
+    	String departDate = request.getParameter("departDate");
+    	String arriveDate = request.getParameter("arriveDate");
+    	
     	String flex = request.getParameter("flex");
     	boolean isFlex = "Y".equals(flex);
     	String nonstop = request.getParameter("nonstop");
     	boolean isNonstop = "Y".equals(nonstop);
     	
-    	System.out.println(departLocation);
-    	System.out.println(arrivalLocation);
-    	System.out.println(numAdults);
-    	System.out.println(numChild);
     	
     	Search search = null;
     	
