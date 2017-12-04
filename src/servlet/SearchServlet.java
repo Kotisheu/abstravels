@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
  
 import beans.Product;
+import beans.Search;
 import utils.DBUtils;
 import utils.MyUtils;
  
@@ -50,7 +51,36 @@ public class SearchServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doGet(request, response);
+    	String departLocation = request.getParameter("from");
+    	
+    	String arrivalLocation = request.getParameter("to");
+    	
+    	int numAdults = Integer.valueOf(request.getParameter("adults"));
+    	int numChild = Integer.valueOf(request.getParameter("child"));
+    	
+    	String flex = request.getParameter("flex");
+    	boolean isFlex = "Y".equals(flex);
+    	String nonstop = request.getParameter("nonstop");
+    	boolean isNonstop = "Y".equals(nonstop);
+    	
+    	System.out.println(departLocation);
+    	System.out.println(arrivalLocation);
+    	System.out.println(numAdults);
+    	System.out.println(numChild);
+    	
+    	Search search = null;
+    	
+    	if (departLocation != null) {
+    		System.out.println(departLocation);
+    		
+    		request.setAttribute("depart", departLocation);
+    		
+    		RequestDispatcher dispatcher //
+            = this.getServletContext().getRequestDispatcher("/WEB-INF/views/searchView.jsp");
+
+    		dispatcher.forward(request, response);
+    	}
+        
     }
  
 }

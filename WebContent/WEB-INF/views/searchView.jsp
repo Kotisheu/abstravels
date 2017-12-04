@@ -1,18 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <head>
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
   
 
 
   <!-- Include Required Prerequisites -->
-  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
-  <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
-   
-  <!-- Include Date Range Picker -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+
+ 
+<!-- Include Date Range Picker -->
   <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
   <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 
@@ -28,52 +27,161 @@
     <input type="radio" id="radio3" name="radios" value="radio3">
    <label for="radio3">Multi-City</label>
  
- <div id="oneway">
-<table>
-	<tr><td><center><input type="text" name="from" placeholder="From where?"></center></td>
-	<td><center><input type="text" name="to" placeholder="To where?"></center></td></tr>
-	<tr><td><center><input placeholder="Departure Date" name ="depart" id="datepicker"/></center></td></tr>
-	<tr><td><center>Number of Adults: <input size= 2 value=1 name="adults" type="number"></center></td>
-	<td><center>Number of Children: <input size = 2 value=0 name="adults" type="number"></center></td></tr>
-	<tr><td><center><input type="checkbox" name="flex"> Flexible date?<br></center></td></tr>
-	<tr><td><center><input type="checkbox" name="nonstop"> Nonstop?<br></center></td></tr>
-	</table>
-</div>   
-        
-<div id="roundtrip"style="display:none";>
-<table>
-	<tr><td><center><input type="text" name="from" placeholder="From where?"></center></td>
-	<td><center><input type="text" name="to" placeholder="To where?"></center></td></tr>
-	<tr><td><center><input placeholder="Departure Date" name ="depart" id="datepicker"/></center></td>
-	<td><center><input placeholder="Return Date" name ="return" id="datepicker"/></center></td></tr>
-	<tr><td><center>Number of Adults: <input size= 2 value=1 name="adults" type="number"></center></td>
-	<td><center>Number of Children: <input size = 2 value=0 name="adults" type="number"></center></td></tr>
-	<tr><td><center><input type="checkbox" name="flex"> Flexible date?<br></center></td></tr>
-	<tr><td><center><input type="checkbox" name="nonstop"> Nonstop?<br></center></td></tr>
-	</table>
-</div>
+  <p style="color: red;">${depart}</p>
 
- <div id="multicity"style="display:none";>
-<div id ="inner">
-<table>
-	<tr><td><center><input type="text" name="from" placeholder="From where?"></center></td>
-	<td><center><input type="text" name="to" placeholder="To where?"></center></td></tr>
-	<tr><td><center><input placeholder="Departure Date" name ="depart" id="datepicker"/></center></td></tr>
-	<tr><td><center>Number of Adults: <input size= 2 value=1 name="adults" type="number"></center></td>
-	<td><center>Number of Children: <input size = 2 value=0 name="adults" type="number"></center></td></tr>
-	<tr><td><center><input type="checkbox" name="flex"> Flexible date?<br></center></td></tr>
-	<tr><td><center><input type="checkbox" name="nonstop"> Nonstop?<br></center></td></tr>
-	</table>
-	<br>
-	</div>
-	<div id="multiple"></div>
-	<input type="button" value="Add Another City" onclick="addCity()">
-</div> 
-<br>
-	<input type="submit" value="Search">
-<br>
-</form>
-</div>
+ <ul class="nav nav-tabs">
+  
+  <li class=""><a href="#home" data-toggle="tab" aria-expanded="true">One-Way</a></li>
+  
+  <li class="active"><a href="#profile" data-toggle="tab" aria-expanded="false">Round-Trip</a></li>
+  
+  <li class=""><a href="#multi-city">Multi-City</a></li>
+</ul>
+<div id="myTabContent" class="tab-content">
+
+  <div class="tab-pane fade active in" id="home">
+
+  <form "form-horizontal" method="POST" action="${pageContext.request.contextPath}/search">
+	<input type="hidden" name="trip" value= "${search.ways}" />
+ 	<div class = "form-group">
+ 		<div class = "col-sm-5">
+ 			<input class="form-control" value= "${search.departLocation}" type="text" name="from" placeholder="From where?"/>
+ 		</div>
+ 		<div class = "col-sm-5">
+ 			<input class="form-control" value= "${search.arrivalLocation}" type="text" name="to" placeholder="To where?">
+ 			</div>
+ 	</div>
+ 	<div class = "form-group">
+ 		<div class ="col-sm-5">
+ 			<input class="form-control" placeholder="Departure Date" name ="depart" id="datepicker"/>
+ 		</div>
+ 		<div class = "col-sm-5">
+ 			<input class="form-control" placeholder="Arrival Date" name ="arrive" id="datepicker"/>		
+ 		</div>
+ 	</div>
+ 	<div class ="form-group">
+ 		<div class ="col-sm-5">
+ 			Number of Adults: <input class="form-control" size= 2 value=1 name="adults" type="number">
+ 		</div>
+ 		<div class = "col-sm-5">
+ 			Number of Children: <input class="form-control" size = 2 value=0 name="child" type="number">
+ 		</div>
+ 	</div>
+ 	<div class = "form-group">
+ 		<div class ="col-sm-5">
+ 			<input class="form-control" type="checkbox" name="flex" value="Y"> Flexible date?
+ 		</div>
+ 		<div class = "col-sm-5">
+ 			<input class="form-control" type="checkbox" name="nonstop" value = "Y"> Nonstop?
+ 		</div>  	
+ 	</div>
+ 	
+ 	<div class= "form-group">
+ 		<div class = "col-sm-10">
+ 		<input class="form-control" type="submit" value= "Submit" />
+ 		</div>
+     
+ 	</div>
+ 	</form>	
+ 	
+ </div>
+ 	
+ 	<div class="tab-pane fade" id="profile">
+   <form "form-horizontal" method="POST" action="${pageContext.request.contextPath}/search">
+	<input class="form-control" type="hidden" name="trip" value= "${search.ways}" />
+  	<div class = "form-group">
+  		<div class = "col-sm-5">
+  			<input class="form-control" type="text" name="from" placeholder="From where?"/>
+  		</div>
+  		<div class = "col-sm-5">
+  			<input class="form-control" type="text" name="to" placeholder="To where?">
+  			</div>
+  	</div>
+  	<div class = "form-group">
+  		<div class ="col-sm-5">
+  			<input class="form-control" placeholder="Departure Date" name ="depart" id="datepicker"/>
+  		</div>
+  		<div class = "col-sm-5">
+  			<input class="form-control" placeholder="Arrival Date" name ="arrive" id="datepicker"/>		
+  		</div>
+  	</div>
+  	<div class ="form-group">
+  		<div class ="col-sm-5">
+  			Number of Adults: <input class="form-control" size= 2 value=1 name="adults" type="number">
+  		</div>
+  		<div class = "col-sm-5">
+  			Number of Children: <input class="form-control" size = 2 value=0 name="adults" type="number">
+  		</div>
+  	</div>
+  	<div class = "form-group">
+  		<div class ="col-sm-5">
+  			<input class="form-control" type="checkbox" name="flex"> Flexible date?
+  		</div>
+  		<div class = "col-sm-5">
+  			<input class="form-control" type="checkbox" name="nonstop"> Nonstop?
+  		</div>  	
+  	</div>
+  	
+  	<div class= "form-group">
+  		<div class = "col-sm-10">
+  		<input class="form-control" type="submit" value= "Submit" />
+  		</div>
+      
+  	</div>
+  	</form>
+  </div>
+  
+  <div class="tab-pane fade" id="multi-city">
+<form "form-horizontal" method="POST" action="${pageContext.request.contextPath}/search">
+	<input class="form-control" type="hidden" name="trip" value= "${search.ways}" />
+  	<div class = "form-group">
+  		<div class = "col-sm-5">
+  			<input class="form-control" type="text" name="from" placeholder="From where?"/>
+  		</div>
+  		<div class = "col-sm-5">
+  			<input class="form-control" type="text" name="to" placeholder="To where?">
+  			</div>
+  	</div>
+  	<div class = "form-group">
+  		<div class ="col-sm-5">
+  			<input class="form-control" placeholder="Departure Date" name ="depart" id="datepicker"/>
+  		</div>
+  		<div class = "col-sm-5">
+  			<input class="form-control" placeholder="Arrival Date" name ="arrive" id="datepicker"/>		
+  		</div>
+  	</div>
+  	<div class ="form-group">
+  		<div class ="col-sm-5">
+  			Number of Adults: <input class="form-control" size= 2 value=1 name="adults" type="number">
+  		</div>
+  		<div class = "col-sm-5">
+  			Number of Children: <input class="form-control" size = 2 value=0 name="adults" type="number">
+  		</div>
+  	</div>
+  	<div class = "form-group">
+  		<div class ="col-sm-5">
+  			<input class="form-control" type="checkbox" name="flex"> Flexible date?
+  		</div>
+  		<div class = "col-sm-5">
+  			<input class="form-control" type="checkbox" name="nonstop"> Nonstop?
+  		</div>  	
+  	</div>
+  	
+  	<div class= "form-group">
+  		<div class = "col-sm-10">
+  		<input class="form-control" type="submit" value= "Submit" />
+  		</div>
+      
+  	</div>
+  	</form>
+  	 </div>
+  	
+  </div>
+  
+  
+ 
+ 
+
 <script>
 
 var radios = document.getElementsByName("radios");

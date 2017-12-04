@@ -51,7 +51,8 @@ public class LoginServlet extends HttpServlet {
         UserAccount user = null;
         boolean hasError = false;
         String errorString = null;
- 
+        
+        System.out.println(userName);
         if (userName == null || password == null || userName.length() == 0 || password.length() == 0) {
             hasError = true;
             errorString = "Required username and password!";
