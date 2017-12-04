@@ -18,7 +18,7 @@
 
 </head>
 <div style="color:#444054;padding: 5px;">
-<form method="POST" action="${pageContext.request.contextPath}/search">
+<form method="POST" action="${pageContext.request.contextPath}/result">
    <input type="radio" id="radio1" name="radios" value="radio1" checked>
    <label for="radio1">One Way</label>
          
@@ -30,39 +30,39 @@
  
  <div id="oneway">
 <table>
-	<tr><td><center><input type="text" name="from" placeholder="From where?"></center></td>
-	<td><center><input type="text" name="to" placeholder="To where?"></center></td></tr>
-	<tr><td><center><input placeholder="Departure Date" name ="depart" id="datepicker"/></center></td></tr>
-	<tr><td><center>Number of Adults: <input size= 2 value=1 name="adults" type="number"></center></td>
-	<td><center>Number of Children: <input size = 2 value=0 name="adults" type="number"></center></td></tr>
-	<tr><td><center><input type="checkbox" name="flex"> Flexible date?<br></center></td></tr>
-	<tr><td><center><input type="checkbox" name="nonstop"> Nonstop?<br></center></td></tr>
+	<tr><td><center><input type="text" name="from[]" placeholder="From where?"></center></td>
+	<td><center><input type="text" name="to[]" placeholder="To where?"></center></td></tr>
+	<tr><td><center><input placeholder="Departure Date" name="depart[]" id="datepicker"/></center></td></tr>
+	<tr><td><center>Number of Adults: <input size= 2 value=1 name="adults[]" type="number"></center></td>
+	<td><center>Number of Children: <input size = 2 value=0 name="child[]" type="number"></center></td></tr>
+	<tr><td><center><input type="checkbox" name="flex[]"> Flexible date?<br></center></td></tr>
+	<tr><td><center><input type="checkbox" name="nonstop[]"> Nonstop?<br></center></td></tr>
 	</table>
 </div>   
         
 <div id="roundtrip"style="display:none";>
 <table>
-	<tr><td><center><input type="text" name="from" placeholder="From where?"></center></td>
-	<td><center><input type="text" name="to" placeholder="To where?"></center></td></tr>
-	<tr><td><center><input placeholder="Departure Date" name ="depart" id="datepicker"/></center></td>
-	<td><center><input placeholder="Return Date" name ="return" id="datepicker"/></center></td></tr>
-	<tr><td><center>Number of Adults: <input size= 2 value=1 name="adults" type="number"></center></td>
-	<td><center>Number of Children: <input size = 2 value=0 name="adults" type="number"></center></td></tr>
-	<tr><td><center><input type="checkbox" name="flex"> Flexible date?<br></center></td></tr>
-	<tr><td><center><input type="checkbox" name="nonstop"> Nonstop?<br></center></td></tr>
+	<tr><td><center><input type="text" name="from[]" placeholder="From where?"></center></td>
+	<td><center><input type="text" name="to[]" placeholder="To where?"></center></td></tr>
+	<tr><td><center><input placeholder="Departure Date" name="depart[]" id="datepicker"/></center></td>
+	<td><center><input placeholder="Return Date" name="return[]" id="datepicker"/></center></td></tr>
+	<tr><td><center>Number of Adults: <input size= 2 value=1 name="adults[]" type="number"></center></td>
+	<td><center>Number of Children: <input size = 2 value=0 name="child[]" type="number"></center></td></tr>
+	<tr><td><center><input type="checkbox" name="flex[]"> Flexible date?<br></center></td></tr>
+	<tr><td><center><input type="checkbox" name="nonstop[]"> Nonstop?<br></center></td></tr>
 	</table>
 </div>
 
  <div id="multicity"style="display:none";>
 <div id ="inner">
 <table>
-	<tr><td><center><input type="text" name="from" placeholder="From where?"></center></td>
-	<td><center><input type="text" name="to" placeholder="To where?"></center></td></tr>
-	<tr><td><center><input placeholder="Departure Date" name ="depart" id="datepicker"/></center></td></tr>
-	<tr><td><center>Number of Adults: <input size= 2 value=1 name="adults" type="number"></center></td>
-	<td><center>Number of Children: <input size = 2 value=0 name="adults" type="number"></center></td></tr>
-	<tr><td><center><input type="checkbox" name="flex"> Flexible date?<br></center></td></tr>
-	<tr><td><center><input type="checkbox" name="nonstop"> Nonstop?<br></center></td></tr>
+	<tr><td><center><input type="text" name="from[]" placeholder="From where?"></center></td>
+	<td><center><input type="text" name="to[]" placeholder="To where?"></center></td></tr>
+	<tr><td><center><input placeholder="Departure Date" name="depart[]" id="datepicker"/></center></td></tr>
+	<tr><td><center>Number of Adults: <input size= 2 value=1 name="adults[]" type="number"></center></td>
+	<td><center>Number of Children: <input size = 2 value=0 name="child[]" type="number"></center></td></tr>
+	<tr><td><center><input type="checkbox" name="flex[]"> Flexible date?<br></center></td></tr>
+	<tr><td><center><input type="checkbox" name="nonstop[]"> Nonstop?<br></center></td></tr>
 	</table>
 	<br>
 	</div>
@@ -112,23 +112,23 @@ function addCity(){
 	multiple.appendChild(clone);
 }
 $(function() {
-    $('input[name="depart"]').daterangepicker({
+    $('input[name="depart[]"]').daterangepicker({
     	autoUpdateInput: false,
     	singleDatePicker: true,
         showDropdowns: true
     }); 
-    $('input[name="depart"]').on('apply.daterangepicker', function(ev, picker) {
+    $('input[name="depart[]"]').on('apply.daterangepicker', function(ev, picker) {
         $(this).val(picker.startDate.format('MM/DD/YYYY'));
     });
 });
 $(function() {
-    $('input[name="return"]').daterangepicker({
+    $('input[name="return[]"]').daterangepicker({
     	autoUpdateInput: false,
     	singleDatePicker: true,
         showDropdowns: true
 
     });
-    $('input[name="return"]').on('apply.daterangepicker', function(ev, picker) {
+    $('input[name="return[]"]').on('apply.daterangepicker', function(ev, picker) {
         $(this).val(picker.startDate.format('MM/DD/YYYY'));
     });
 });
