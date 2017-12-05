@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import beans.Bids;
+import beans.Leg;
 import beans.Reservation;
 
 public class ReservationUtils {
@@ -55,10 +56,6 @@ public class ReservationUtils {
 				+ "WHERE C.Id=1 AND R.AccountNo= C.AccountNo AND I.ResrNo = R.ResrNo AND I.Date >= now() "
 				+ "GROUP BY R.ResrNo;";
 		
-		String sql2 = "now()";
-		
-		System.out.println(sql2);
-		
 		PreparedStatement pstm = conn.prepareStatement(sql);
 
 		ResultSet rs = pstm.executeQuery();
@@ -86,6 +83,44 @@ public class ReservationUtils {
 		return list;
 	}
 
+
+	public static List<Leg> queryTripItinerary(Connection conn) throws SQLException {
+		String sql = "SELECT R.ResrNo,I.AirlineID,I.FlightNo, I.LegNo, I.Date,L.DepAirportID, L.DepTime, L.ArrAirportID, L.ArrTIme "
+				+ "FROM ABSTravellings.Reservation R, ABSTravellings.Customer C, ABSTravellings.Includes I, ABSTravellings.Leg L "
+				+ "WHERE  R.AccountNo= C.AccountNo AND I.ResrNo = R.ResrNo AND R.ResrNo= 111 AND I.LegNo= L.LegNo;";
+		
+		PreparedStatement pstm = conn.prepareStatement(sql);
+
+		ResultSet rs = pstm.executeQuery();
+
+		List<Leg> list = new ArrayList<Leg>();
+
+		while (rs.next()) {
+			int resrNo = rs.getInt("ResrNo");
+			String airlineID = rs.getString("AirlineID");
+			int flightNo = rs.getInt("FlightNo");
+			int legNo = rs.getInt("LegNo");
+			Date resDate = rs.getDate("Date");
+			String depAirportID = rs.getString("DepAirportID");
+			Date depTime = rs.getDate("DepTime");
+			String arrAirportID = rs.getString("ArrAirportID");
+			Date arrTime = rs.getDate("ArrTime");
+
+			Leg leg = new Leg();
+			leg.setResrNo(resrNo);
+			leg.setAirlineId(airlineID);
+			leg.setFlightNo(flightNo);
+			leg.setArrAirportID(arrAirportID);
+			leg.setDepAirportID(depAirportID);
+			leg.setDepTime(depTime);
+			leg.setArrTime(arrTime);
+			list.add(leg);
+		}
+
+		return list;
+	}
+
+	
 	public static List<Bids> queryBidHistory(Connection conn) throws SQLException {
 		String sql = "SELECT A.accountNo, A.airlineId, A.flightNo, A.Class, A.date, A.NYOP "
 				+ "FROM	ABSTravellings.Auctions A, ABSTravellings.Customer C "
