@@ -10,13 +10,14 @@
  <body>
  
     <jsp:include page="_header.jsp"></jsp:include>
-  
+   
  
     <h3>Flight List</h3>
  
     <p style="color: red;">${errorString}</p>
  
-    pls work :c
+ 
+    <a href="createProduct" >Create Product</a>
  
     <jsp:include page="_footer.jsp"></jsp:include>
  

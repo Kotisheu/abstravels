@@ -17,7 +17,7 @@
 
 </head>
 <div style="color:#444054;padding: 5px;">
-<form method="POST" action="${pageContext.request.contextPath}/result">
+<form method="POST" action="${pageContext.request.contextPath}/flightList">
    <input type="radio" id="radio1" name="radios" value="radio1" checked>
    <label for="radio1">One Way</label>
          

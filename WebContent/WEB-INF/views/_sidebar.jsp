@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
+
 <style>
 body {
     font-family: "Lato", sans-serif;
@@ -47,8 +45,6 @@ body {
   .sidenav a {font-size: 18px;}
 }
 </style>
-</head>
-<body>
 
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -69,6 +65,4 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
 </script>
-     
-</body>
-</html> 
+
