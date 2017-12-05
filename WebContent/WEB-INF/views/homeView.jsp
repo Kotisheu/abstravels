@@ -12,9 +12,10 @@
   <body>
  
      <jsp:include page="_header.jsp"></jsp:include>
-       <!--<jsp:include page="_menu.jsp"></jsp:include>-->
+ 
+       
 <center>
-    <h3 >Welcome to the homepage of ABS Travellings</h3>
+    <h3 >Welcome to the homepage of ABSTravelling</h3>
    We offer flights at amazing deals! Come and book with us today! <br><br>
    <jsp:include page="searchView.jsp"></jsp:include>   
    <pre>

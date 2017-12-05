@@ -16,7 +16,7 @@ import beans.Flight;
 import utils.SRUtils;
 import utils.MyUtils;
  
-@WebServlet(urlPatterns = {"/result" })
+@WebServlet(urlPatterns = {"/result"})
 public class SearchServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
  
@@ -46,8 +46,8 @@ public class SearchServlet extends HttpServlet {
         }else if(radios.equals("radio3")){
         	//multicity
         }*/
-       String errorString = null;
-        List<Flight> list = null;
+     //  String errorString = null;
+       // List<Flight> list = null;
         /*try {
             list = SRUtils.findFlights(conn,"a h");
         } catch (SQLException e) {
@@ -55,9 +55,9 @@ public class SearchServlet extends HttpServlet {
             errorString = e.getMessage();
         }*/
         // Store info in request attribute, before forward to views
-        request.setAttribute("errorString", errorString);
+      //  request.setAttribute("errorString", errorString);
         //request.setAttribute("errorString", test);;
-        request.setAttribute("flights", list);
+       // request.setAttribute("flights", list);
          
         // Forward to /WEB-INF/views/productListView.jsp
         RequestDispatcher dispatcher = request.getServletContext()

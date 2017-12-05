@@ -12,7 +12,7 @@
 </head>
 <body>
  <jsp:include page="_header.jsp"></jsp:include>
-  <!-- <center> <jsp:include page="_menu.jsp"></jsp:include>-->
+
     <%
     	String username= (String) session.getAttribute("userName");
     	if (username == null) {

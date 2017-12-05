@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
+  
+ <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-+ENW/yibaokMnme+vBLnHMphUYxHs34h9lpdbSLuAwGkOKFRl4C34WkjazBtb7eT" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -9,7 +14,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="${pageContext.request.contextPath}/">ABS Travellings</a>
+      <jsp:include page="_sidebar.jsp"></jsp:include>
+      <%-- <a class="navbar-brand" href="${pageContext.request.contextPath}/">ABS Travelling</a> --%>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
@@ -35,6 +41,9 @@
             <% }%>
           </ul>
         </li>
+      </ul>
+       <ul class="nav navbar-nav navbar-left">
+        <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-left">
         <li><a href="${pageContext.request.contextPath}/productList">Product List</a></li>
