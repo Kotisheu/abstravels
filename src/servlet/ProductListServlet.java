@@ -30,7 +30,7 @@ public class ProductListServlet extends HttpServlet {
         Connection conn = MyUtils.getStoredConnection(request);
  
         String errorString = null;
-        List<Product> list = null;
+		List<Product> list = null;
         try {
             list = DBUtils.queryProduct(conn);
         } catch (SQLException e) {

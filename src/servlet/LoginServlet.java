@@ -93,6 +93,7 @@ public class LoginServlet extends HttpServlet {
         else {
             HttpSession session = request.getSession();
             MyUtils.storeLoginedUser(session, user);
+            session.setAttribute("userName", userName);
  
             // If user checked "Remember me".
             if (remember) {
@@ -104,7 +105,7 @@ public class LoginServlet extends HttpServlet {
             }
  
             // Redirect to userInfo page.
-            response.sendRedirect(request.getContextPath() + "/userInfo");
+            response.sendRedirect(request.getContextPath() + "/home");
         }
     }
  

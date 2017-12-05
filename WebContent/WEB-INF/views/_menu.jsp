@@ -10,5 +10,7 @@
    <a href="${pageContext.request.contextPath}/userInfo">Account Info</a>
    |
    <a href="${pageContext.request.contextPath}/view">View Tables</a>
+   |
+   <a href="${pageContext.request.contextPath}/customerInfo">CustomerInfo</a>
     </center>
 </div>  
