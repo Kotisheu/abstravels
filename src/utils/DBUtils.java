@@ -21,7 +21,7 @@ public class DBUtils {
     public static Account findUser(Connection conn, //
             String userName, String password) throws SQLException {
  
-        String sql = "Select a.UserName, a.Pass " //
+        String sql = "Select a.UserName, a.Pass from accounts a " //
                 + " where a.UserName = ? and a.pass= ?";
  
         PreparedStatement pstm = conn.prepareStatement(sql);
@@ -61,16 +61,50 @@ public class DBUtils {
     public static void register(Connection conn, Account uA,Person p,Customer c) throws SQLException {
         String sql = "Insert into accounts(UserName,Pass) values (?,?)";
         String sql2 = "Insert into person(firstName,LastName,Address,City,State,ZipCode) values (?,?,?,?,?,?)";
+        String sql3= "Insert into customer(id,accountNo,email,creationDate,phoneNumber) values (?,?,?,?,?)";
         
  
         PreparedStatement pstm = conn.prepareStatement(sql);
         PreparedStatement pstm2 = conn.prepareStatement(sql2);
+        PreparedStatement pstm3 = conn.prepareStatement(sql3);
 
         pstm.setString(1, uA.getUserName());
         pstm.setString(2, uA.getPass());
         
- 
+        pstm2.setString(1, p.getFirstName());
+        pstm2.setString(2,p.getLastName());
+        pstm2.setString(3,p.getAddress());
+        pstm2.setString(4,p.getCity());
+        pstm2.setString(5,p.getState());
+        pstm2.setInt(6,p.getZipcode());
+        
+        int accNum=0;
+        int personID=0;
         pstm.executeUpdate();
+        sql = "Select LAST_INSERT_ID()";
+        pstm=conn.prepareStatement(sql);
+        ResultSet rs = pstm.executeQuery();
+        if (rs.next()) {
+            accNum=rs.getInt("LAST_INSERT_ID()");
+        }
+        
+        
+        pstm2.executeUpdate();
+        sql = "Select LAST_INSERT_ID()";
+        pstm=conn.prepareStatement(sql);
+        rs = pstm.executeQuery();
+        if (rs.next()) {
+            personID=rs.getInt("LAST_INSERT_ID()");
+        }
+        pstm3.setInt(1, personID);
+        pstm3.setInt(2,accNum);
+        pstm3.setString(3,c.getEmail());
+        pstm3.setDate(4,c.getCreationDate());
+        pstm3.setString(5,c.getPhoneNum());
+        pstm3.executeUpdate();
+        //get the person id and acc num to make a custoemr 
+        
+        
     }
  
     public static List<Product> queryProduct(Connection conn) throws SQLException {

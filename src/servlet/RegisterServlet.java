@@ -2,8 +2,10 @@ package servlet;
  
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
- 
+import java.time.LocalDateTime;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.jasper.tagplugins.jstl.Util;
 
 import beans.Account;
 import beans.Customer;
@@ -54,6 +58,8 @@ public class RegisterServlet extends HttpServlet {
         String phoneNumber=request.getParameter("phoneNumber");
         String firstName=request.getParameter("firstName");
         String lastName=request.getParameter("lastName");
+        long millis=System.currentTimeMillis();  
+        java.sql.Date date=new java.sql.Date(millis);  
 
         Account user = new Account(userName,password);
         Customer cust= new Customer();
@@ -65,8 +71,13 @@ public class RegisterServlet extends HttpServlet {
         person.setLastName(lastName);
         person.setState(state);
         person.setZipcode(zipcode);
+        
+        cust.setCreationDate(date);
+        cust.setPhoneNum(phoneNumber);
+        cust.setEmail(userName);
         String errorString = null;
  
+        
         if (userName == null || password == null || userName.length() == 0 || password.length() == 0) {
          
             errorString = "Required username and password!";
@@ -84,7 +95,7 @@ public class RegisterServlet extends HttpServlet {
       
         if (errorString==null) {// if no error, register
             try {
-                DBUtils.register(conn, user);
+                DBUtils.register(conn, user,person,cust);
             } catch (SQLException e) {
                 e.printStackTrace();
                 errorString = e.getMessage();

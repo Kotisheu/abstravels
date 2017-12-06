@@ -8,7 +8,7 @@ public class Customer extends Person{
 	String email;
 	Date creationDate;
 	int rating;
-	int phoneNum;
+	String phoneNum;
 	
 	public Customer() {
 		
@@ -43,10 +43,10 @@ public class Customer extends Person{
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
-	public int getPhoneNum() {
+	public String getPhoneNum() {
 		return phoneNum;
 	}
-	public void setPhoneNum(int phoneNum) {
+	public void setPhoneNum(String phoneNum) {
 		this.phoneNum = phoneNum;
 	}
 	
