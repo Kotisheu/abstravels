@@ -48,6 +48,8 @@ public class EmployeeHomeServlet extends HttpServlet {
         // Store info in request attribute, before forward to views
         request.setAttribute("errorString", errorString);
         request.setAttribute("customerList", list);
+        
+        
          
        
         RequestDispatcher dispatcher = request.getServletContext()
