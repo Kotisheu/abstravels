@@ -13,8 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.Customer;
+import beans.Employee;
+import beans.Flights;
 import utils.MyUtils;
 import utils.CustomerUtils;
+import utils.EmployeeUtils;
+import utils.FlightsUtils;
 
 /**
  * Servlet implementation class EmployeeHomeServlet
@@ -39,8 +43,12 @@ public class EmployeeHomeServlet extends HttpServlet {
 		 
         String errorString = null;
 		List<Customer> list = null;
+		List<Flights> flightList = null;
+		List<Employee> employeeList = null;
         try {
             list = CustomerUtils.queryAllCustomers(conn);
+            flightList = FlightsUtils.queryAllFlights(conn);
+            employeeList = EmployeeUtils.queryAllEmployee(conn);
         } catch (SQLException e) {
             e.printStackTrace();
             errorString = e.getMessage();
@@ -48,6 +56,8 @@ public class EmployeeHomeServlet extends HttpServlet {
         // Store info in request attribute, before forward to views
         request.setAttribute("errorString", errorString);
         request.setAttribute("customerList", list);
+        request.setAttribute("flightList", flightList);
+        request.setAttribute("employeeList", employeeList);
         
         
          
