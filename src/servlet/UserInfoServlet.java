@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
- 
+
+import beans.Account;
 import beans.UserAccount;
 import utils.MyUtils;
  
@@ -27,7 +28,7 @@ public class UserInfoServlet extends HttpServlet {
         HttpSession session = request.getSession();
  
         // Check User has logged on
-        UserAccount loginedUser = MyUtils.getLoginedUser(session);
+        Account loginedUser = MyUtils.getLoginedUser(session);
  
         // Not logged in
         if (loginedUser == null) {

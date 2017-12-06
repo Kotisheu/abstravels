@@ -11,6 +11,9 @@
      <!-- User store in session with attribute: loginedUser -->
      Hello, <b>${loginedUser.userName}</b>
      <!--  make this log off when user is logged in? -->
+     
+	<a href="${pageContext.request.contextPath}/employeelogin">Employee Login</a>
+     
 <a href="${pageContext.request.contextPath}/login">Login</a>
    |
    <a href="${pageContext.request.contextPath}/register">Register</a>

@@ -10,6 +10,9 @@ public class Customer extends Person{
 	int rating;
 	int phoneNum;
 	
+	public Customer() {
+		
+	}
 	public int getAccountNo() {
 		return accountNo;
 	}

@@ -6,7 +6,15 @@ String firstName;
 String lastName;
 String address;
 String city;
+String state;
 int zipcode;
+
+public String getState() {
+	return state;
+}
+public void setState(String state) {
+	this.state=state;
+}
 public int getId() {
 	return id;
 }

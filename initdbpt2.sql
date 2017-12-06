@@ -18,7 +18,7 @@ primary key (CODE)
  
 -- Insert data: ---------------------------------------------------------------
  
-insert into user_account (USER_NAME, GENDER, PASSWORD)
+insert into accounts (USER_NAME, GENDER, PASSWORD)
 values ('tom', 'M', 'tom001');
  
 insert into user_account (USER_NAME, GENDER, PASSWORD)

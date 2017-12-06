@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
- 
+
+import beans.Account;
 import beans.UserAccount;
 import utils.DBUtils;
 import utils.MyUtils;
@@ -44,11 +45,11 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String userName = request.getParameter("userName");
-        String password = request.getParameter("password");
+        String password = request.getParameter("pass");
         String rememberMeStr = request.getParameter("rememberMe");
         boolean remember = "Y".equals(rememberMeStr);
  
-        UserAccount user = null;
+        Account user = null;
         boolean hasError = false;
         String errorString = null;
  
@@ -73,9 +74,9 @@ public class LoginServlet extends HttpServlet {
         }
         // If error, forward to /WEB-INF/views/login.jsp
         if (hasError) {
-            user = new UserAccount();
+            user = new Account();
             user.setUserName(userName);
-            user.setPassword(password);
+            user.setPass(password);
  
             // Store information in request attribute, before forward.
             request.setAttribute("errorString", errorString);

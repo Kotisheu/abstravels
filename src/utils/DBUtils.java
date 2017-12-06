@@ -10,16 +10,19 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import beans.Account;
+import beans.Customer;
+import beans.Person;
 import beans.Product;
 import beans.UserAccount;
  
 public class DBUtils {
  
-    public static UserAccount findUser(Connection conn, //
+    public static Account findUser(Connection conn, //
             String userName, String password) throws SQLException {
  
-        String sql = "Select a.User_Name, a.Password, a.Gender from User_Account a " //
-                + " where a.User_Name = ? and a.password= ?";
+        String sql = "Select a.UserName, a.Pass " //
+                + " where a.UserName = ? and a.pass= ?";
  
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setString(1, userName);
@@ -27,45 +30,45 @@ public class DBUtils {
         ResultSet rs = pstm.executeQuery();
  
         if (rs.next()) {
-            String gender = rs.getString("Gender");
-            UserAccount user = new UserAccount();
+            Account user = new Account();
             user.setUserName(userName);
-            user.setPassword(password);
-            user.setGender(gender);
+            user.setPass(password);
             return user;
         }
         return null;
     }
  
-    public static UserAccount findUser(Connection conn, String userName) throws SQLException {
+    public static Account findUser(Connection conn, String userName) throws SQLException {
  
-        String sql = "Select a.User_Name, a.Password, a.Gender from User_Account a "//
-                + " where a.User_Name = ? ";
- 
+    	System.out.println("lolxd");
+        String sql = "Select a.username, a.pass from accounts a "//
+                + " where a.username = ? ";
+        
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setString(1, userName);
- 
+        System.out.println("dfdfsdf");
         ResultSet rs = pstm.executeQuery();
- 
+        System.out.println("1idkdjf");
         if (rs.next()) {
-            String password = rs.getString("Password");
-            String gender = rs.getString("Gender");
-            UserAccount user = new UserAccount();
+            String password = rs.getString("Pass");
+            Account user = new Account();
             user.setUserName(userName);
-            user.setPassword(password);
-            user.setGender(gender);
+            user.setPass(password);
             return user;
         }
         return null;
     }
-    public static void register(Connection conn, UserAccount uA) throws SQLException {
-        String sql = "Insert into User_account(User_name,Gender,Password) values (?,?,?)";
+    public static void register(Connection conn, Account uA,Person p,Customer c) throws SQLException {
+        String sql = "Insert into accounts(UserName,Pass) values (?,?)";
+        String sql2 = "Insert into person(firstName,LastName,Address,City,State,ZipCode) values (?,?,?,?,?,?)";
+        
  
         PreparedStatement pstm = conn.prepareStatement(sql);
- 
+        PreparedStatement pstm2 = conn.prepareStatement(sql2);
+
         pstm.setString(1, uA.getUserName());
-        pstm.setString(2, uA.getGender());
-        pstm.setString(3, uA.getPassword());
+        pstm.setString(2, uA.getPass());
+        
  
         pstm.executeUpdate();
     }

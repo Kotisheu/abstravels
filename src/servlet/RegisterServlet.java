@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.Account;
+import beans.Customer;
+import beans.Person;
 import beans.UserAccount;
 import utils.DBUtils;
 import utils.MyUtils;
@@ -43,10 +46,25 @@ public class RegisterServlet extends HttpServlet {
         
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
-        String gender = (String) request.getParameter("gender");
+        String address=request.getParameter("address");
+        String city= request.getParameter("city");
+        String state= request.getParameter("state");
+        String zip=request.getParameter("zipcode");
+        int zipcode=Integer.parseInt(zip);
+        String phoneNumber=request.getParameter("phoneNumber");
+        String firstName=request.getParameter("firstName");
+        String lastName=request.getParameter("lastName");
 
-        UserAccount user = new UserAccount(userName, gender,password);
-   
+        Account user = new Account(userName,password);
+        Customer cust= new Customer();
+        Person person=new Person();
+        
+        person.setAddress(address);
+        person.setCity(city);
+        person.setFirstName(firstName);
+        person.setLastName(lastName);
+        person.setState(state);
+        person.setZipcode(zipcode);
         String errorString = null;
  
         if (userName == null || password == null || userName.length() == 0 || password.length() == 0) {
@@ -76,6 +94,8 @@ public class RegisterServlet extends HttpServlet {
         // Store information to request attribute, before forward to views.
         request.setAttribute("errorString", errorString);
         request.setAttribute("user", user);
+        request.setAttribute("cust", cust);
+        request.setAttribute("person", person);
  
         // If error, forward to register page.
         if (errorString != null) {

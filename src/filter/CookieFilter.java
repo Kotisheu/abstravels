@@ -13,7 +13,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
- 
+
+import beans.Account;
 import beans.UserAccount;
 import utils.DBUtils;
 import utils.MyUtils;
@@ -40,7 +41,7 @@ public class CookieFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession session = req.getSession();
  
-        UserAccount userInSession = MyUtils.getLoginedUser(session);
+       Account userInSession = MyUtils.getLoginedUser(session);
         // 
         if (userInSession != null) {
             session.setAttribute("COOKIE_CHECKED", "CHECKED");
@@ -56,7 +57,7 @@ public class CookieFilter implements Filter {
         if (checked == null && conn != null) {
             String userName = MyUtils.getUserNameInCookie(req);
             try {
-                UserAccount user = DBUtils.findUser(conn, userName);
+                Account user = DBUtils.findUser(conn, userName);
                 MyUtils.storeLoginedUser(session, user);
             } catch (SQLException e) {
                 e.printStackTrace();
