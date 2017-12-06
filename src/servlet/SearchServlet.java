@@ -41,10 +41,10 @@ public class SearchServlet extends HttpServlet {
         request.setAttribute("errorString", errorString);
         request.setAttribute("productList", list);
          
-        response.sendRedirect(request.getContextPath() + "/login");
+       
         // Forward to /WEB-INF/views/productListView.jsp
         RequestDispatcher dispatcher = request.getServletContext()
-                .getRequestDispatcher("/WEB-INF/views/homeView.jsp");
+                .getRequestDispatcher("/WEB-INF/views/resultsView.jsp");
         dispatcher.forward(request, response);
     }
  
