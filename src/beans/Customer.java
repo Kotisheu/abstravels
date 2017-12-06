@@ -8,8 +8,19 @@ public class Customer extends Person{
 	String email;
 	Date creationDate;
 	int rating;
-	int phoneNum;
+	String phoneNum;
+	int id;
 	
+	public Customer(){
+		
+	}
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public int getAccountNo() {
 		return accountNo;
 	}
@@ -40,10 +51,10 @@ public class Customer extends Person{
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
-	public int getPhoneNum() {
+	public String getPhoneNum() {
 		return phoneNum;
 	}
-	public void setPhoneNum(int phoneNum) {
+	public void setPhoneNum(String phoneNum) {
 		this.phoneNum = phoneNum;
 	}
 	

@@ -63,6 +63,9 @@
       <ul class="nav navbar-nav navbar-left">
         <li><a href="${pageContext.request.contextPath}/ItineraryServlet">Itinerary</a>
       </ul>
+       <ul class="nav navbar-nav navbar-left">
+        <li><a href="${pageContext.request.contextPath}/EmployeeHomeServlet">Employee Home</a>
+      </ul>
       
     </div>
   </div>
