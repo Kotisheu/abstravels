@@ -4,8 +4,8 @@ import java.sql.Date;
 
 public class Customer extends Person{
 	int accountNo;
-	int ccNo;
-	String email;
+	String ccNo;
+	//String email;
 	Date creationDate;
 	int rating;
 	String phoneNum;
@@ -27,18 +27,13 @@ public class Customer extends Person{
 	public void setAccountNo(int accountNo) {
 		this.accountNo = accountNo;
 	}
-	public int getCcNo() {
+	public String getCcNo() {
 		return ccNo;
 	}
-	public void setCcNo(int ccNo) {
+	public void setCcNo(String ccNo) {
 		this.ccNo = ccNo;
 	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
+
 	public Date getCreationDate() {
 		return creationDate;
 	}

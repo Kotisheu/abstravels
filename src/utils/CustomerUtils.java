@@ -14,7 +14,9 @@ import beans.Customer;
 public class CustomerUtils {
 	
 	public static List<Customer> queryAllCustomers(Connection conn) throws SQLException {
-		String sql = "SELECT * FROM abstravellings.customer;";
+		String sql = "SELECT * "
+				+ "FROM abstravellings.customer c, abstravellings.person p "
+				+ "WHERE c.Id = p.Id;";
 		
 		PreparedStatement pstm = conn.prepareStatement(sql);
 
@@ -25,11 +27,18 @@ public class CustomerUtils {
 		while (rs.next()) {
 			int id = rs.getInt("Id");
 			int accountNo = rs.getInt("AccountNo");
-			String creditCarNo = rs.getString("CreditCardNo");
+			String creditCardNo = rs.getString("CreditCardNo");
 			String email = rs.getString("Email");
 			Date creation = rs.getDate("CreationDate");
 			int rating = rs.getInt("Rating");
 			String phone = rs.getString("PhoneNumber");
+			String firstName = rs.getString("FirstName");
+			String lastName = rs.getString("LastName");
+			String address = rs.getString("Address");
+			String city = rs.getString("City");
+			String state = rs.getString("State");
+			int zip = rs.getInt("ZipCode");
+			
 			
 			Customer customer = new Customer ();
 			customer.setId(id);
@@ -39,6 +48,14 @@ public class CustomerUtils {
 			customer.setCreationDate(creation);
 			customer.setRating(rating);
 			customer.setPhoneNum(phone);
+			customer.setFirstName(firstName);
+			customer.setLastName(lastName);
+			customer.setAddress(address);
+			customer.setCity(city);
+			customer.setState(state);
+			customer.setZipcode(zip);
+			customer.setRating(rating);
+			customer.setCcNo(creditCardNo);
 			list.add(customer);
 
 		}

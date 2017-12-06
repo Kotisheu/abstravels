@@ -5,12 +5,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Employee Home</title>
 </head>
 <body>
-	<h2>Customers</h2>
 	
 	<jsp:include page="_header.jsp"></jsp:include>
+	
+	<h3>Customers Information</h3>
 	
 	<table class="table table-striped table-hover ">
 		<thead>
@@ -18,6 +19,12 @@
 				<th>Id</th>
 				<th>Account No.</th>
 				<th>Creation Date</th>
+				<th>First Name </th>
+				<th>Last Name </th>
+				<th>Address</th>
+				<th>City</th>
+				<th>State</th>
+				<th>Zip</th>
 				<th>Credit Card</th>
 				<th>Email</th>
 				<th>Phone</th>
@@ -30,6 +37,12 @@
 					<td>${customer.id}</td>
 					<td>${customer.accountNo}</td>
 					<td>${customer.creationDate}</td>
+					<td>${customer.firstName}</td>
+					<td>${customer.lastName}</td>
+					<td>${customer.address}</td>
+					<td>${customer.city}</td>
+					<td>${customer.state}</td>
+					<td>${customer.zipcode}</td>
 					<td>${customer.ccNo}</td>
 					<td>${customer.email}</td>
 					<td>${customer.phoneNum}</td>
