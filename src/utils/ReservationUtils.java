@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,6 +63,132 @@ public class ReservationUtils {
 
 		return list;
 
+	}
+	
+	public static List<Reservation> queryByCustomer(Connection conn, String firstName, String lastName) throws SQLException {
+		
+		
+		String sql = "SELECT r.ResrNo, r.ResrDate, i.FlightNo, r.BookingFee, r.TotalFare, r.RepSSN, r.AccountNo, p.FirstName, p.LastName "
+				+ "FROM abstravellings.reservation r, abstravellings.customer c, abstravellings.person p, abstravellings.includes i "
+				+ "WHERE r.AccountNo = c.AccountNo AND c.Id = p.Id AND r.ResrNo = i.ResrNo AND  p.FirstName = \"" + firstName + "\" AND p.LastName = \"" + lastName + "\";";
+		
+		System.out.println(sql);
+		
+		PreparedStatement pstm = conn.prepareStatement(sql);
+
+		ResultSet rs = pstm.executeQuery();
+
+		List<Reservation> list = new ArrayList<Reservation>();
+
+		while (rs.next()) {
+			int resNum = rs.getInt("ResrNo");
+			Date resDate = rs.getDate("ResrDate");
+			float bookingFee = rs.getFloat("BookingFee");
+			float totalFare = rs.getFloat("TotalFare");
+			int ssn = rs.getInt("RepSSN");
+			int accountNo = rs.getInt("AccountNo");
+			int flightNoInt = rs.getInt("FlightNo");
+			String cfirstName = rs.getString("FirstName");
+			String clastName = rs.getString("LastName");
+
+			Reservation reservation = new Reservation();
+			reservation.setReservationNumber(resNum);
+			reservation.setReservationDate(resDate);
+			reservation.setBookingFee(bookingFee);
+			reservation.setTotalFare(totalFare);
+			reservation.setSSN(ssn);
+			reservation.setAccountNo(accountNo);
+			reservation.setFlightNo(flightNoInt);
+			reservation.setFirstName(cfirstName);
+			reservation.setLastName(clastName);
+			list.add(reservation);
+			
+			System.out.println(Arrays.toString(list.toArray()));
+	
+		}
+
+		return list;
+	}
+	
+	public static List<Reservation> queryByFlight(Connection conn, String flightNo) throws SQLException {
+		String sql = "SELECT r.ResrNo, r.ResrDate, i.FlightNo, r.BookingFee, r.TotalFare, r.RepSSN, r.AccountNo, p.FirstName, p.LastName "
+				+ "FROM abstravellings.reservation r, abstravellings.customer c, abstravellings.person p, abstravellings.includes i "
+				+ "WHERE r.AccountNo = c.AccountNo AND c.Id = p.Id AND r.ResrNo = i.ResrNo AND i.FlightNo = " + flightNo + ";";
+		
+		System.out.println(sql);
+		
+		PreparedStatement pstm = conn.prepareStatement(sql);
+
+		ResultSet rs = pstm.executeQuery();
+
+		List<Reservation> list = new ArrayList<Reservation>();
+
+		while (rs.next()) {
+			int resNum = rs.getInt("ResrNo");
+			Date resDate = rs.getDate("ResrDate");
+			float bookingFee = rs.getFloat("BookingFee");
+			float totalFare = rs.getFloat("TotalFare");
+			int ssn = rs.getInt("RepSSN");
+			int accountNo = rs.getInt("AccountNo");
+			int flightNoInt = rs.getInt("FlightNo");
+			String firstName = rs.getString("FirstName");
+			String lastName = rs.getString("LastName");
+
+			Reservation reservation = new Reservation();
+			reservation.setReservationNumber(resNum);
+			reservation.setReservationDate(resDate);
+			reservation.setBookingFee(bookingFee);
+			reservation.setTotalFare(totalFare);
+			reservation.setSSN(ssn);
+			reservation.setAccountNo(accountNo);
+			reservation.setFlightNo(flightNoInt);
+			reservation.setFirstName(firstName);
+			reservation.setLastName(lastName);
+			list.add(reservation);
+			
+			System.out.println(Arrays.toString(list.toArray()));
+	
+		}
+
+		return list;
+	}
+	
+	public static List<Reservation> queryAllReservation(Connection conn) throws SQLException {
+		String sql = "SELECT r.ResrNo, r.ResrDate, i.FlightNo, r.BookingFee, r.TotalFare, r.RepSSN, r.AccountNo, p.FirstName, p.LastName "
+				+ "FROM abstravellings.reservation r, abstravellings.customer c, abstravellings.person p, abstravellings.includes i "
+				+ "WHERE r.AccountNo = c.AccountNo AND c.Id = p.Id AND r.ResrNo = i.ResrNo;";
+		
+		PreparedStatement pstm = conn.prepareStatement(sql);
+
+		ResultSet rs = pstm.executeQuery();
+
+		List<Reservation> list = new ArrayList<Reservation>();
+
+		while (rs.next()) {
+			int resNum = rs.getInt("ResrNo");
+			Date resDate = rs.getDate("ResrDate");
+			float bookingFee = rs.getFloat("BookingFee");
+			float totalFare = rs.getFloat("TotalFare");
+			int ssn = rs.getInt("RepSSN");
+			int accountNo = rs.getInt("AccountNo");
+			int flightNo = rs.getInt("FlightNo");
+			String firstName = rs.getString("FirstName");
+			String lastName = rs.getString("LastName");
+
+			Reservation reservation = new Reservation();
+			reservation.setReservationNumber(resNum);
+			reservation.setReservationDate(resDate);
+			reservation.setBookingFee(bookingFee);
+			reservation.setTotalFare(totalFare);
+			reservation.setSSN(ssn);
+			reservation.setAccountNo(accountNo);
+			reservation.setFlightNo(flightNo);
+			reservation.setFirstName(firstName);
+			reservation.setLastName(lastName);
+			list.add(reservation);
+		}
+
+		return list;
 	}
 
 	public static List<Reservation> queryCurrentReservation(Connection conn) throws SQLException {
