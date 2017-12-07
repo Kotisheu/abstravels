@@ -87,20 +87,8 @@
 				aria-expanded="true">Customer</a></li>
 			<li class=""><a href="#mailingList" data-toggle="tab"
 				aria-expanded="true">Mailing List</a></li>
-			<li class="dropdown"><a class="dropdown-toggle"
-				data-toggle="dropdown" href="#" aria-expanded="false">Revenue <span
-					class="caret"></span>
-			</a>
-				<ul class="dropdown-menu">
-					<li><a href="#revDropdown1" data-toggle="tab">Search by
-							Flight</a></li>
-
-					<li><a href="#revDropdown2" data-toggle="tab">Search by
-							Destination</a></li>
-
-					<li><a href="#revDropdown3" data-toggle="tab">Search by
-							Customer</a></li>
-				</ul></li>
+			<li class=""><a href="#reservation" data-toggle="tab"
+				aria-expanded="true">Reservation</a></li>
 
 			<li class="dropdown"><a class="dropdown-toggle"
 				data-toggle="dropdown" href="#" aria-expanded="false">Reservation
@@ -109,7 +97,7 @@
 				<ul class="dropdown-menu">
 					<li><a href="#resrDropdown1" data-toggle="tab">Search by
 							Flight</a></li>
-
+					<li class="divider"></li>
 					<li><a href="#resrDropdown2" data-toggle="tab">Search by
 							Customers</a></li>
 				</ul></li>
@@ -226,34 +214,6 @@
 				</table>
 			</div>
 
-			<div class="tab-pane fade" id="revDropdown1">
-				<form class="form-horizontal" role="search" method="POST"
-					action="${pageContext.request.contextPath}/RevenueSearchServlet">
-					<fieldset>
-						<legend>Search By Flight</legend>
-						<div class="form-group">
-							<label for="flightNo" class="col-lg-2 control-label">Flight
-								No.</label>
-							<div class="col-lg-10">
-								<input type="text" class="form-control" id="flightNo"
-									name="flightNo" placeholder="Flight No">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="airlineId" class="col-lg-2 control-label">Airline
-								ID.</label>
-							<div class="col-lg-10">
-								<input type="text" class="form-control" id="airlineId"
-									placeholder="Airline ID" name="airlineId">
-							</div>
-						</div>
-						<input type="submit" class="btn btn-info" name="searchType"
-							value="Search By Flight">
-
-					</fieldset>
-				</form>
-			</div>
-
 			<div class="tab-pane fade" id="resrDropdown1">
 				<form class="" role="search" method="POST"
 					action="${pageContext.request.contextPath}/ReservationSearchServlet"
@@ -278,19 +238,17 @@
 					<fieldset>
 						<legend>Search By Customer</legend>
 						<div class="form-group">
-							<label for="firstName" class="col-lg-2 control-label">First
-								Name</label>
+							<label for="firstName" class="col-lg-2 control-label">First Name</label>
 							<div class="col-lg-10">
-								<input type="text" class="form-control" id="firstName"
-									name="firstName" placeholder="First Name">
+								<input type="text" class="form-control" id="firstName" name="firstName"
+									placeholder="First Name">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="lastName" class="col-lg-2 control-label">Last
-								Name</label>
+							<label for="lastName" class="col-lg-2 control-label">Last Name</label>
 							<div class="col-lg-10">
 								<input type="text" class="form-control" id="lastName"
-									placeholder="Last Name" name="lastName">
+									placeholder="Last Name" name = "lastName">
 							</div>
 						</div>
 						<input type="submit" class="btn btn-info" name="searchType"
