@@ -58,7 +58,7 @@
 					<tr>
 						<td>Password</td>
 						<td><input type="password" name="pass"
-							value="${user.password}" /></td>
+							value="${user.pass}" /></td>
 					</tr>
 					<tr>
 						<td>Remember me</td>

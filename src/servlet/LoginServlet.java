@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String userName = request.getParameter("userName");
-        String password = request.getParameter("pass");
+        String password = request.getParameter("password");
         String rememberMeStr = request.getParameter("rememberMe");
         boolean remember = "Y".equals(rememberMeStr);
  
@@ -61,10 +61,11 @@ public class LoginServlet extends HttpServlet {
             try {
                 // Find the user in the DB.
                 user = DBUtils.findUser(conn, userName, password);
- 
+                
                 if (user == null) {
                     hasError = true;
                     errorString = "User Name or password invalid";
+                    
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -85,7 +86,7 @@ public class LoginServlet extends HttpServlet {
             // Forward to /WEB-INF/views/login.jsp
             RequestDispatcher dispatcher //
                     = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
- 
+            System.out.println("RIGHT BEFORE THE THING");
             dispatcher.forward(request, response);
         }
         // If no error
