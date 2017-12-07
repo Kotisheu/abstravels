@@ -13,7 +13,19 @@ public class Reservation {
 	private String firstName;
 	private String lastName;
 	
+	private String AirlineId;
 	
+	
+	public String getAirlineId() {
+		return AirlineId;
+	}
+
+
+	public void setAirlineId(String airlineId) {
+		AirlineId = airlineId;
+	}
+
+
 	public Reservation() {
 		
 	}
