@@ -3,7 +3,6 @@ package servlet;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,57 +11,49 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.Reservation;
+import utils.CustomerUtils;
 import utils.EmployeeUtils;
 import utils.MyUtils;
-import utils.ReservationUtils;
 
 /**
- * Servlet implementation class CurrentTripServlet
+ * Servlet implementation class EmployeeUpdateServlet
  */
-@WebServlet("/currentTrip")
-public class CurrentTripServlet extends HttpServlet {
+@WebServlet("/EmployeeUpdateServlet")
+public class EmployeeUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CurrentTripServlet() {
+    public EmployeeUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-    /**
+	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Connection conn = MyUtils.getStoredConnection(request);
-		String errorString = null;
-		List<Reservation> list = null;
-		try {
-			list = ReservationUtils.queryCurrentReservation(conn);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			errorString = e.getMessage();
-		}
-		
-		request.setAttribute("errorString", errorString);
-		request.setAttribute("reservationList", list);
-		// Forward to /WEB-INF/views/productListView.jsp
-        RequestDispatcher dispatcher = request.getServletContext()
-                .getRequestDispatcher("/WEB-INF/views/currentTrips.jsp");
-        dispatcher.forward(request, response);
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String reservationNumber = request.getParameter("reservationNumber");
-	
+		String employeeId = request.getParameter("employeeId");
+		String firstName = request.getParameter("efirstName");
+		String lastName = request.getParameter("elastName");
+		String address = request.getParameter("eaddress");
+		String city = request.getParameter("ecity");
+		String state = request.getParameter("estate");
+		String zip = request.getParameter("ezip");
+		String ssn = request.getParameter("essn");
+		String start = request.getParameter("start");
+		String manager = request.getParameter("manager");
+		String hourly = request.getParameter("hourly");
+		
 		int statements = -1;
 		
 		Connection conn = MyUtils.getStoredConnection(request);
@@ -71,7 +62,7 @@ public class CurrentTripServlet extends HttpServlet {
         String errorString = null;
 		
 		try {
-			statements = ReservationUtils.cancelReservation(conn, reservationNumber);
+			statements = EmployeeUtils.updateEmployeeInfo(conn, employeeId, firstName, lastName, address, city, state, zip, ssn, start, hourly, manager);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -89,13 +80,13 @@ public class CurrentTripServlet extends HttpServlet {
  
             // Forward to /WEB-INF/views/login.jsp
             RequestDispatcher dispatcher //
-                    = this.getServletContext().getRequestDispatcher("/WEB-INF/views/currentTrips.jsp");
+                    = this.getServletContext().getRequestDispatcher("/WEB-INF/views/employeeHomeView.jsp");
  
             dispatcher.forward(request, response);
         }
 		
 		RequestDispatcher dispatcher //
-        = this.getServletContext().getRequestDispatcher("/WEB-INF/views/currentTrips.jsp");
+        = this.getServletContext().getRequestDispatcher("/WEB-INF/views/employeeHomeView.jsp");
 
 		dispatcher.forward(request, response);
 	}

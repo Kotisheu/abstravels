@@ -4,9 +4,22 @@ import java.sql.Date;
 
 public class Employee extends Person {
 	int SSN;
-	boolean isManager;
+	boolean manager;
 	Date startDate;
-	int hourlyRate;
+	float hourlyRate;
+	String password;
+	
+	public Employee (){
+		
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public int getSSN() {
 		return SSN;
@@ -17,11 +30,17 @@ public class Employee extends Person {
 	}
 
 	public boolean isManager() {
-		return isManager;
+		return manager;
 	}
 
-	public void setManager(boolean isManager) {
-		this.isManager = isManager;
+	//special case
+	public void setManager(int isManager) {
+		if (isManager == 1) {
+			this.manager = true;
+		}
+		else {
+			this.manager = false;
+		}
 	}
 
 	public Date getStartDate() {
@@ -32,11 +51,11 @@ public class Employee extends Person {
 		this.startDate = startDate;
 	}
 
-	public int getHourlyRate() {
+	public float getHourlyRate() {
 		return hourlyRate;
 	}
 
-	public void setHourlyRate(int hourlyRate) {
+	public void setHourlyRate(float hourlyRate) {
 		this.hourlyRate = hourlyRate;
 	}
 

@@ -5,42 +5,58 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link
-	href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-+ENW/yibaokMnme+vBLnHMphUYxHs34h9lpdbSLuAwGkOKFRl4C34WkjazBtb7eT"
-	crossorigin="anonymous">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <title>Current Trips</title>
 </head>
 <body>
 
 	<jsp:include page="_header.jsp"></jsp:include>
 
-	<h2>Current Reservations</h2>
-	<table class="table table-striped table-hover ">
-		<thead>
-			<tr>
-				<th>Reservation No.</th>
-				<th>Reservation Date</th>
-				<th>Booking Fee</th>
-				<th>Total Fare</th>
-				<th>Account No.</th>
-			</tr>
-		</thead>
+	<div class="list-group container">
 		<c:forEach items="${reservationList}" var="reservation">
-			<tr>
-				<td>${reservation.reservationNumber}</td>
-				<td>${reservation.reservationDate}</td>
-				<td>${reservation.bookingFee}</td>
-				<td>${reservation.totalFare}</td>
-				<td>${reservation.accountNo}</td>
-			</tr>
+			<a href="#" class="list-group-item">
+				<h4 class="list-group-item-heading">Reservation #:
+					${reservation.reservationNumber}</h4>
+
+				<table class="table table-striped table-hover ">
+					<thead>
+						<tr>
+							<th>Account No.</th>
+							<th>Reservation Date</th>
+							<th>Booking Fee</th>
+							<th>Total Fare</th>
+						</tr>
+					</thead>
+
+					<tr>
+						<td>${reservation.accountNo}</td>
+						<td>${reservation.reservationDate}</td>
+						<td>${reservation.bookingFee}</td>
+						<td>${reservation.totalFare}</td>
+
+					</tr>
+
+				</table>
+				<form method="POST"
+					action="${pageContext.request.contextPath}/CurrentTripServlet"
+					class="form-horizontal" role="form">
+					<input type="hidden" name="reservationNumber" value= "${reservation.reservationNumber}">
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
+
+				<div class="btn-group">
+					<a href="#" class="btn btn-primary">Edit Trip</a> <a href="#"
+						class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+						aria-expanded="false"><span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Cancel Reservation</a></li>
+					</ul>
+				</div>
+
+			</a>
 		</c:forEach>
-	</table>
+	</div>
+
 
 	<jsp:include page="_footer.jsp"></jsp:include>
 </body>

@@ -16,6 +16,16 @@ import beans.Leg;
 import beans.Reservation;
 
 public class ReservationUtils {
+	
+	public static int cancelReservation (Connection conn, String reservationNumber) throws SQLException {
+		String sql = "DELETE FROM ABSTravellings.Reservation WHERE ResrNo = " + reservationNumber + ";";
+		
+		PreparedStatement pstm = conn.prepareStatement(sql);
+
+		int rs = pstm.executeUpdate();
+		
+		return rs;
+	}
 
 	public static List<Reservation> queryPassengerReservation(Connection conn) throws SQLException {
 		String sql = "SELECT r.AccountNo, r.ResrNo, r.ResrDate, r.BookingFee, r.TotalFare, r.RepSSN "
