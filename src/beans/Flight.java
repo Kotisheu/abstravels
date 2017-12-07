@@ -12,7 +12,6 @@ String days;
 
 float revenue;
 
-Flight
 public Flight() {
 	
 }
@@ -39,12 +38,6 @@ public String getDays() {
 }
 public void setDays(String days) {
 	this.days = days;
-}
-public List<Leg> getLegs() {
-	return legs;
-}
-public void setLegs(List<Leg> legs) {
-	this.legs = legs;
 }
 
 
