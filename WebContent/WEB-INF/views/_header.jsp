@@ -53,8 +53,7 @@
 						<li>Hello, <b>${loginedUser.userName}</b>
 						<li><a href="${pageContext.request.contextPath}/userInfo">User
 								Information</a></li>
-						<li><a href="${pageContext.request.contextPath}/customerInfo">User
-								Information</a></li>
+						<li><a href="${pageContext.request.contextPath}/customerInfo">Customer Info</a></li>
 						<li class="request.getSession().invalidate();"><a href="#">Logoff</a></li>
 
 						<%
@@ -77,16 +76,10 @@
 				<li><a href="${pageContext.request.contextPath}/view">View
 						Tables</a>
 			</ul>
-			<ul class="nav navbar-nav navbar-left">
-				<li><a href="${pageContext.request.contextPath}/customerInfo">CustomerInfo</a>
-			</ul>
-			<ul class="nav navbar-nav navbar-left">
+
+			<ul class="nav navbar-nav navbar-right">
 				<li><a href="${pageContext.request.contextPath}/currentTrip">My
 						Trips</a>
-			</ul>
-			<ul class="nav navbar-nav navbar-left">
-				<li><a
-					href="${pageContext.request.contextPath}/ItineraryServlet">Itinerary</a>
 			</ul>
 			<ul class="nav navbar-nav navbar-left">
 				<li><a

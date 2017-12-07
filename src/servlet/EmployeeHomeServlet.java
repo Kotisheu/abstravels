@@ -15,7 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import beans.Customer;
 import beans.Employee;
 import beans.Flights;
+import beans.Reservation;
 import utils.MyUtils;
+import utils.ReservationUtils;
 import utils.CustomerUtils;
 import utils.EmployeeUtils;
 import utils.FlightsUtils;
@@ -45,6 +47,7 @@ public class EmployeeHomeServlet extends HttpServlet {
 		List<Customer> list = null;
 		List<Flights> flightList = null;
 		List<Employee> employeeList = null;
+		List<Reservation> reservationList = null;
         try {
             list = CustomerUtils.queryAllCustomers(conn);
             flightList = FlightsUtils.queryAllFlights(conn);
@@ -65,14 +68,14 @@ public class EmployeeHomeServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getServletContext()
                 .getRequestDispatcher("/WEB-INF/views/employeeHomeView.jsp");
         dispatcher.forward(request, response);
+        return;
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+
 	}
 
 }

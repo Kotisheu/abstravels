@@ -9,11 +9,62 @@ public class Reservation {
 	private float totalFare;
 	private int SSN;
 	private int accountNo;
+	private int flightNo;
+	private String firstName;
+	private String lastName;
+	private String airlineId;
 	
+	
+	public String getAirlineId() {
+		return airlineId;
+	}
+
+
+	public void setAirlineId(String airlineId) {
+		this.airlineId = airlineId;
+	}
+
+
 	public Reservation() {
 		
 	}
 	
+	
+	public int getFlightNo() {
+		return flightNo;
+	}
+
+
+	public void setFlightNo(int flightNo) {
+		this.flightNo = flightNo;
+	}
+
+
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+
+
+	public String getLastName() {
+		return lastName;
+	}
+
+
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+
+
 	public int getReservationNumber() {
 		return reservationNumber;
 	}

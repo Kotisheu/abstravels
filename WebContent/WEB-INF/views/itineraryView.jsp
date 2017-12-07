@@ -68,10 +68,6 @@
 					</div>
 				</div>
 
-
-
-
-
 				</p>
 			</a>
 		</c:forEach>

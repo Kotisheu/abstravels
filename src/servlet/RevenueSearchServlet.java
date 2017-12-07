@@ -13,58 +13,41 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.Reservation;
-import utils.EmployeeUtils;
+import utils.FlightsUtils;
 import utils.MyUtils;
 import utils.ReservationUtils;
 
 /**
- * Servlet implementation class CurrentTripServlet
+ * Servlet implementation class RevenueSearchServlet
  */
-@WebServlet("/currentTrip")
-public class CurrentTripServlet extends HttpServlet {
+@WebServlet("/RevenueSearchServlet")
+public class RevenueSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CurrentTripServlet() {
+    public RevenueSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-    /**
+	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Connection conn = MyUtils.getStoredConnection(request);
-		String errorString = null;
-		List<Reservation> list = null;
-		try {
-			list = ReservationUtils.queryCurrentReservation(conn);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			errorString = e.getMessage();
-		}
-		
-		request.setAttribute("errorString", errorString);
-		request.setAttribute("reservationList", list);
-		// Forward to /WEB-INF/views/productListView.jsp
-        RequestDispatcher dispatcher = request.getServletContext()
-                .getRequestDispatcher("/WEB-INF/views/currentTrips.jsp");
-        dispatcher.forward(request, response);
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String reservationNumber = request.getParameter("reservationNumber");
-		String task = request.getParameter("task");
-	
-		int statements = -1;
+		String searchType = request.getParameter("searchType");
+		System.out.println(searchType);
+		
+		List<Reservation> reservationList = null;
 		
 		Connection conn = MyUtils.getStoredConnection(request);
 		
@@ -73,19 +56,34 @@ public class CurrentTripServlet extends HttpServlet {
 		
 		try {
 			
-			if (task.equals("cancel")) {
-				System.out.println("cancel");
-				statements = ReservationUtils.cancelReservation(conn, reservationNumber);
+			if (searchType.equals("Search By Flight")) {
+				System.out.println("Search By Flight");
+				String flightNo = request.getParameter("flightNo");
+				String airlineId = request.getParameter("airlineId");
+				reservationList = FlightsUtils.queryRevByFlight (conn, flightNo, airlineId);
 				
-				response.sendRedirect("/test/currentTrip");
+				request.setAttribute("reservationList", reservationList);
+				request.setAttribute("flightNo", flightNo);
+				request.setAttribute("airlineId", airlineId);
+				RequestDispatcher dispatcher //
+                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/revenueSearchResultView.jsp");
+
+				dispatcher.forward(request, response);
 	
 				return;
 			}
-			else if (task.equals("itinerary")) {
+			else if (searchType.equals("Search By Customer")) {
 				System.out.println("itinerary");
-				request.setAttribute("reservationNumber",reservationNumber);
-				RequestDispatcher dispatcher //
-                = this.getServletContext().getRequestDispatcher("/ItineraryServlet");
+				
+				String firstName = request.getParameter("firstName");
+				String lastName = request.getParameter("lastName");
+				
+				reservationList = ReservationUtils.queryByCustomer (conn, firstName, lastName);
+				
+				request.setAttribute("reservationList", reservationList);
+				
+				RequestDispatcher dispatcher
+                = this.getServletContext().getRequestDispatcher("/WEB-INF/views/reservationSearchResultView.jsp");
 
 				dispatcher.forward(request, response);
 				return;
@@ -93,7 +91,7 @@ public class CurrentTripServlet extends HttpServlet {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			if (statements == -1) {
+			if (reservationList == null) {
                 hasError = true;
                 errorString = "Unable to update the account Information";
             }
@@ -107,6 +105,7 @@ public class CurrentTripServlet extends HttpServlet {
  
             dispatcher.forward(request, response);
         }
+		
 		return;
 	}
 
