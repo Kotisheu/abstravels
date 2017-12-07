@@ -15,6 +15,7 @@
  
     User Name: <b>${user.userName}</b>
     <br />
+	 Account Type:${type}
  
     <jsp:include page="_footer.jsp"></jsp:include>
  

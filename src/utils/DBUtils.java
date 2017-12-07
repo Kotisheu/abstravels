@@ -37,6 +37,31 @@ public class DBUtils {
         }
         return null;
     }
+    public static String getAccType(Connection conn, String username) throws SQLException{
+    	 String sql = "Select c.id from customer c, accounts a " //
+                 + " where a.UserName = ? and a.AccountNum = c.accountNo";
+    	 String sql2 = "Select e.id , e.isManager from Employee e, accounts a " //
+                 + " where a.username = ? and a.AccountNum = e.accountNum";
+    	 
+    	 //first check if its in customers 
+    	 PreparedStatement pstm = conn.prepareStatement(sql);
+    	 pstm.setString(1, username);
+    	 ResultSet rs = pstm.executeQuery();
+    	 if (rs.next()) {
+             return "Customer";
+         }
+    	 
+    	 pstm = conn.prepareStatement(sql2);
+    	 pstm.setString(1, username); 
+    	 rs= pstm.executeQuery();
+    	 if (rs.next()) {
+    		 //check if its a Manager
+    		 if (rs.getInt(2)==0)
+             	return "Employee";
+    		 else return "Manager";
+         }
+    	 return null;
+    }
  
     public static Account findUser(Connection conn, String userName) throws SQLException {
  

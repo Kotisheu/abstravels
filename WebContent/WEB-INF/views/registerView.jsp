@@ -97,7 +97,7 @@
                <td><input type="text" name="zipcode"  value= "${person.zipcode}" /> </td>
             </tr>
             <td>Phone Number</td>
-               <td><input type="text" name="phoneNumber" maxvalue="10" value= "${person.phoneNumber}" /> </td>
+               <td><input type="text" name="phoneNumber" maxvalue="10" value= "${cust.phoneNum}" /> </td>
             </tr>
                <td colspan ="2">
                   <input type="submit" value= "Submit" />
