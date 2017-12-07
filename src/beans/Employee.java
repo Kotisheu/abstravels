@@ -7,9 +7,18 @@ public class Employee extends Person {
 	boolean manager;
 	Date startDate;
 	float hourlyRate;
+	String password;
 	
 	public Employee (){
 		
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public int getSSN() {

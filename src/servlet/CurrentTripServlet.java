@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.Reservation;
+import utils.EmployeeUtils;
 import utils.MyUtils;
 import utils.ReservationUtils;
 
@@ -60,7 +61,43 @@ public class CurrentTripServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		String reservationNumber = request.getParameter("reservationNumber");
+	
+		int statements = -1;
+		
+		Connection conn = MyUtils.getStoredConnection(request);
+		
+		boolean hasError = false;
+        String errorString = null;
+		
+		try {
+			statements = ReservationUtils.cancelReservation(conn, reservationNumber);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			if (statements == -1) {
+                hasError = true;
+                errorString = "Unable to update the account Information";
+            }
+			
+		}
+		if (hasError) {
+ 
+            // Store information in request attribute, before forward.
+            //request.setAttribute("errorString", errorString);
+            //request.setAttribute("user", customer);
+ 
+            // Forward to /WEB-INF/views/login.jsp
+            RequestDispatcher dispatcher //
+                    = this.getServletContext().getRequestDispatcher("/WEB-INF/views/currentTrips.jsp");
+ 
+            dispatcher.forward(request, response);
+        }
+		
+		RequestDispatcher dispatcher //
+        = this.getServletContext().getRequestDispatcher("/WEB-INF/views/currentTrips.jsp");
+
+		dispatcher.forward(request, response);
 	}
 
 }

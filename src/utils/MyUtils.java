@@ -7,7 +7,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
- 
+
+import beans.Account;
 import beans.UserAccount;
  
 public class MyUtils {
@@ -29,19 +30,19 @@ public class MyUtils {
     }
  
     // Store user info in Session.
-    public static void storeLoginedUser(HttpSession session, UserAccount loginedUser) {
+    public static void storeLoginedUser(HttpSession session, Account loginedUser) {
         // On the JSP can access via ${loginedUser}
         session.setAttribute("loginedUser", loginedUser);
     }
  
     // Get the user information stored in the session.
-    public static UserAccount getLoginedUser(HttpSession session) {
-        UserAccount loginedUser = (UserAccount) session.getAttribute("loginedUser");
+    public static Account getLoginedUser(HttpSession session) {
+        Account loginedUser = (Account) session.getAttribute("loginedUser");
         return loginedUser;
     }
  
     // Store info in Cookie
-    public static void storeUserCookie(HttpServletResponse response, UserAccount user) {
+    public static void storeUserCookie(HttpServletResponse response, Account user) {
         System.out.println("Store user cookie");
         Cookie cookieUserName = new Cookie(ATT_NAME_USER_NAME, user.getUserName());
         // 1 day (Converted to seconds)
