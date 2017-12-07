@@ -5,10 +5,19 @@ String airlineID;
 int flightNo;
 int noSeats;
 String days;
-// NOT SURE HOW MIN/MAX LENGTH OF STAY WORKS SO IT IS EXCLUDED FOR NOW
+float revenue;
+
 public Flight() {
 	
 }
+
+public float getRevenue() {
+	return revenue;
+}
+public void setRevenue(float revenue) {
+	this.revenue = revenue;
+}
+
 public String getAirlineID() {
 	return airlineID;
 }
