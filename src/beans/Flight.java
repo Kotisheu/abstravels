@@ -9,19 +9,12 @@ int flightNo;
 int noSeats;
 String days;
 
+
 float revenue;
 
 public Flight() {
 	
 }
-
-public float getRevenue() {
-	return revenue;
-}
-public void setRevenue(float revenue) {
-	this.revenue = revenue;
-}
-
 public String getAirlineID() {
 	return airlineID;
 }
@@ -45,12 +38,6 @@ public String getDays() {
 }
 public void setDays(String days) {
 	this.days = days;
-}
-public List<Leg> getLegs() {
-	return legs;
-}
-public void setLegs(List<Leg> legs) {
-	this.legs = legs;
 }
 
 
