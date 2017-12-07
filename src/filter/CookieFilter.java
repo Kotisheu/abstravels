@@ -42,6 +42,7 @@ public class CookieFilter implements Filter {
         HttpSession session = req.getSession();
  
        Account userInSession = MyUtils.getLoginedUser(session);
+       String type= MyUtils.getLoginedUserType(session);
         // 
         if (userInSession != null) {
             session.setAttribute("COOKIE_CHECKED", "CHECKED");
@@ -58,7 +59,7 @@ public class CookieFilter implements Filter {
             String userName = MyUtils.getUserNameInCookie(req);
             try {
                 Account user = DBUtils.findUser(conn, userName);
-                MyUtils.storeLoginedUser(session, user);
+                MyUtils.storeLoginedUser(session, user,type);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

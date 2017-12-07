@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String userName = request.getParameter("userName");
-        String password = request.getParameter("pass");
+        String password = request.getParameter("password");
         String rememberMeStr = request.getParameter("rememberMe");
         boolean remember = "Y".equals(rememberMeStr);
  
@@ -61,10 +61,11 @@ public class LoginServlet extends HttpServlet {
             try {
                 // Find the user in the DB.
                 user = DBUtils.findUser(conn, userName, password);
- 
+                
                 if (user == null) {
                     hasError = true;
                     errorString = "User Name or password invalid";
+                    
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -77,33 +78,45 @@ public class LoginServlet extends HttpServlet {
             user = new Account();
             user.setUserName(userName);
             user.setPass(password);
- 
+            
             // Store information in request attribute, before forward.
             request.setAttribute("errorString", errorString);
             request.setAttribute("user", user);
+           
  
             // Forward to /WEB-INF/views/login.jsp
             RequestDispatcher dispatcher //
                     = this.getServletContext().getRequestDispatcher("/WEB-INF/views/loginView.jsp");
- 
+            
             dispatcher.forward(request, response);
         }
         // If no error
         // Store user information in Session
         // And redirect to userInfo page.
         else {
+        	Connection conn = MyUtils.getStoredConnection(request);
+            String type= "LOL";
+			try {
+				type = DBUtils.getAccType(conn, userName);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
             HttpSession session = request.getSession();
-            MyUtils.storeLoginedUser(session, user);
- 
+            MyUtils.storeLoginedUser(session, user,type);
+            //get the type of account
+			System.out.println("TYPE = "+ type);
             // If user checked "Remember me".
             if (remember) {
                 MyUtils.storeUserCookie(response, user);
+                
             }
             // Else delete cookie.
             else {
                 MyUtils.deleteUserCookie(response);
             }
  
+            //GET THE ACCOUNT TYPE
             // Redirect to userInfo page.
             response.sendRedirect(request.getContextPath() + "/userInfo");
         }

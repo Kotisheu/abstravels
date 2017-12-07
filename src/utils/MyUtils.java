@@ -30,15 +30,20 @@ public class MyUtils {
     }
  
     // Store user info in Session.
-    public static void storeLoginedUser(HttpSession session, Account loginedUser) {
+    public static void storeLoginedUser(HttpSession session, Account loginedUser,String type) {
         // On the JSP can access via ${loginedUser}
         session.setAttribute("loginedUser", loginedUser);
+        session.setAttribute("type",type);
     }
  
     // Get the user information stored in the session.
     public static Account getLoginedUser(HttpSession session) {
         Account loginedUser = (Account) session.getAttribute("loginedUser");
         return loginedUser;
+    }
+    public static String getLoginedUserType(HttpSession session) {
+    	String type= (String) session.getAttribute("type");
+        return type;
     }
  
     // Store info in Cookie
