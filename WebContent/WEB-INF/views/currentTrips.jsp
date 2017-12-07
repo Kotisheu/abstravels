@@ -37,22 +37,23 @@
 					</tr>
 
 				</table>
-				<form method="POST"
-					action="${pageContext.request.contextPath}/CurrentTripServlet"
-					class="form-horizontal" role="form">
-					<input type="hidden" name="reservationNumber" value= "${reservation.reservationNumber}">
-					<button type="submit" class="btn btn-primary">Submit</button>
-				</form>
-
-				<div class="btn-group">
-					<a href="#" class="btn btn-primary">Edit Trip</a> <a href="#"
-						class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
-						aria-expanded="false"><span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="#">Cancel Reservation</a></li>
-					</ul>
+				<div class="container">
+					<form method="POST"
+						action="${pageContext.request.contextPath}/currentTrip"
+						class="form-horizontal" role="form">
+						<fieldset>
+							<div class="form-group">
+								<input type="hidden" name="reservationNumber"
+									value="${reservation.reservationNumber}">
+								<button type="submit" name ="task"class="btn btn-primary" value="itinerary">View
+									Itinerary</button>
+								<button type="submit" name="task" class="btn btn-primary" value="update">Update</button>
+								<button type="submit" name="task" class="btn btn-primary" value="cancel">Cancel
+									Reservation</button>
+							</div>
+						</fieldset>
+					</form>
 				</div>
-
 			</a>
 		</c:forEach>
 	</div>

@@ -85,10 +85,10 @@ public class EmployeeUpdateServlet extends HttpServlet {
             dispatcher.forward(request, response);
         }
 		
-		RequestDispatcher dispatcher //
-        = this.getServletContext().getRequestDispatcher("/WEB-INF/views/employeeHomeView.jsp");
+		response.sendRedirect("/test/EmployeeHomeServlet");
 
-		dispatcher.forward(request, response);
+		
+		return;
 	}
 
 }

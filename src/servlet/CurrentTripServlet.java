@@ -62,6 +62,7 @@ public class CurrentTripServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String reservationNumber = request.getParameter("reservationNumber");
+		String task = request.getParameter("task");
 	
 		int statements = -1;
 		
@@ -71,7 +72,24 @@ public class CurrentTripServlet extends HttpServlet {
         String errorString = null;
 		
 		try {
-			statements = ReservationUtils.cancelReservation(conn, reservationNumber);
+			
+			if (task.equals("cancel")) {
+				System.out.println("cancel");
+				statements = ReservationUtils.cancelReservation(conn, reservationNumber);
+				
+				response.sendRedirect("/test/currentTrip");
+	
+				return;
+			}
+			else if (task.equals("itinerary")) {
+				System.out.println("itinerary");
+				request.setAttribute("reservationNumber",reservationNumber);
+				RequestDispatcher dispatcher //
+                = this.getServletContext().getRequestDispatcher("/ItineraryServlet");
+
+				dispatcher.forward(request, response);
+				return;
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -83,21 +101,13 @@ public class CurrentTripServlet extends HttpServlet {
 		}
 		if (hasError) {
  
-            // Store information in request attribute, before forward.
-            //request.setAttribute("errorString", errorString);
-            //request.setAttribute("user", customer);
- 
-            // Forward to /WEB-INF/views/login.jsp
+			System.out.println("Error");
             RequestDispatcher dispatcher //
                     = this.getServletContext().getRequestDispatcher("/WEB-INF/views/currentTrips.jsp");
  
             dispatcher.forward(request, response);
         }
-		
-		RequestDispatcher dispatcher //
-        = this.getServletContext().getRequestDispatcher("/WEB-INF/views/currentTrips.jsp");
-
-		dispatcher.forward(request, response);
+		return;
 	}
 
 }

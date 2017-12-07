@@ -65,6 +65,7 @@ public class EmployeeHomeServlet extends HttpServlet {
         RequestDispatcher dispatcher = request.getServletContext()
                 .getRequestDispatcher("/WEB-INF/views/employeeHomeView.jsp");
         dispatcher.forward(request, response);
+        return;
 	}
 
 	/**
@@ -73,6 +74,7 @@ public class EmployeeHomeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+		return;
 	}
 
 }

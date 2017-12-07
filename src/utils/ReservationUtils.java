@@ -18,11 +18,15 @@ import beans.Reservation;
 public class ReservationUtils {
 	
 	public static int cancelReservation (Connection conn, String reservationNumber) throws SQLException {
-		String sql = "DELETE FROM ABSTravellings.Reservation WHERE ResrNo = " + reservationNumber + ";";
+		String sql2 = "DELETE FROM ABSTravellings.Reservation WHERE ResrNo = " + reservationNumber + ";";
+		String sql = "DELETE FROM ABSTravellings.Includes WHERE ResrNo = " + reservationNumber + ";";
 		
 		PreparedStatement pstm = conn.prepareStatement(sql);
 
 		int rs = pstm.executeUpdate();
+		
+		pstm = conn.prepareStatement(sql2);
+		rs = pstm.executeUpdate();
 		
 		return rs;
 	}
@@ -94,10 +98,10 @@ public class ReservationUtils {
 	}
 
 
-	public static List<Leg> queryTripItinerary(Connection conn) throws SQLException {
+	public static List<Leg> queryTripItinerary(Connection conn, String reservationNum) throws SQLException {
 		String sql = "SELECT R.ResrNo,I.AirlineID,I.FlightNo, I.LegNo, I.Date,L.DepAirportID, L.DepTime, L.ArrAirportID, L.ArrTIme "
 				+ "FROM ABSTravellings.Reservation R, ABSTravellings.Customer C, ABSTravellings.Includes I, ABSTravellings.Leg L "
-				+ "WHERE  R.AccountNo= C.AccountNo AND I.ResrNo = R.ResrNo AND R.ResrNo= 111 AND I.LegNo= L.LegNo;";
+				+ "WHERE  R.AccountNo= C.AccountNo AND I.ResrNo = R.ResrNo AND R.ResrNo = " + reservationNum + " AND I.LegNo= L.LegNo;";
 		
 		PreparedStatement pstm = conn.prepareStatement(sql);
 

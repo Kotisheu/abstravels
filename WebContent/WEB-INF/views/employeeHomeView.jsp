@@ -81,7 +81,7 @@
 <body>
 
 	<jsp:include page="_header.jsp"></jsp:include>
-
+<div class="container">
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="#home" data-toggle="tab"
 			aria-expanded="true">Quick Tools</a></li>
